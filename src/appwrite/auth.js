@@ -13,44 +13,25 @@ export class AuthService{
   }
 
   async createAccount({email, password, name}){
-    try {
-      const userAccount = await this.account.create(ID.unique(), email, password, name);
-      if(userAccount){
-        //call another method
-        return this.login({email,password});
-
-      }
-      else{
-        return userAccount;
-      }
-      
-    } catch (error) {
-      throw error;
-      
+    const userAccount = await this.account.create(ID.unique(), email, password, name);
+    if(userAccount){
+      //call another method
+      return this.login({email,password});
+    }
+    else{
+      return userAccount;
     }
   }
   async login({email, password}){
-    try {
-      const userLogin = await this.account.createEmailPasswordSession(email, password);
-      return userLogin;
-      
-    } catch (error) {
-      throw error;
-      
-    }
+    const userLogin = await this.account.createEmailPasswordSession(email, password);
+    return userLogin;
   }
   async getCurrentUser(){
-    try {
-      const currentUser =await this.account.get();
-      if(currentUser){
-        return currentUser;
-      }else{
-        return null;
-      }
-      
-    } catch (error) {
-      throw error;
-      
+    const currentUser = await this.account.get();
+    if(currentUser){
+      return currentUser;
+    }else{
+      return null;
     }
   }
   async logout(){

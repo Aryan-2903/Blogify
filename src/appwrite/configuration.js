@@ -56,19 +56,12 @@ export class Service{
   }
 
   async deletePost(slug){
-    try {
-        await this.databases.deleteDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug
-      )
-      return true;
-      
-    } catch (error) {
-      throw error;
-      return false;
-      
-    }
+    await this.databases.deleteDocument(
+      config.appwriteDatabaseId,
+      config.appwriteCollectionId,
+      slug
+    )
+    return true;
   }
 
   async getPost(slug){
